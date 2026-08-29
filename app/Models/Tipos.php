@@ -8,4 +8,9 @@ class Tipos extends Model
 {
     //
     protected $fillable = ['nome'];
+
+    public function responsavel() {
+        return $this->belongsTo(User::class, 'tipos_id');
+    }
+
 }

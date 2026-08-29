@@ -11,35 +11,22 @@ class Trilhas extends Model
         'description',
         'data_inicio',
         'data_fim',
-        'ativo'
-    ];
-
-    public function responsavel() {
-        return $this->hasOne(User::class);
-    }
-
-    /*
-
-    class Trilhas extends Model
-{
-    protected $fillable = [
-        'titulo',
-        'descricao',
-        'data_inicio',
-        'data_fim',
         'ativo',
+        'responsavel_id'
     ];
 
     protected $casts = [
         'data_inicio' => 'date',
         'data_fim' => 'date',
-        'ativo' => 'boolean',
+        'ativo' => 'boolean,'
     ];
 
-    public function responsavel()
-    {
+    public function responsavel() {
         return $this->belongsTo(User::class, 'responsavel_id');
     }
-}  -> mudar pra isso
-    */
+
+    public function tabelaResponsavel() {
+        return $this->belongsTo(UsuarioHasTrilhas::class, 'trilhas_id');
+    }
+
 }
