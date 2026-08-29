@@ -13,17 +13,25 @@ return new class extends Migration
     {
         //
         Schema::create('trilhas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); 
             $table->string('titulo');
             $table->text('description');
             $table->datetime('data_inicio')->nullable();
             $table->datetime('data_fim')->nullable();
             $table->boolean('ativo')->default(true);
-            $table->foreignId('responsavel_id')->constrained('users');
+            $table->unsignedInteger('responsavel_id');
+            $table->foreign('responsavel_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
-
+/**
+ * 
+ * $table->foreign('categoria_id')
+          ->references('id')
+          ->on('categorias')
+          ->onDelete('cascade');
+   unsignedInteger('nome_id')
+ */
     /**
      * Reverse the migrations.
      */

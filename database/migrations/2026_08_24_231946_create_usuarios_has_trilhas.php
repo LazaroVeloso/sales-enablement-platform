@@ -12,9 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usuarios_has_trilhas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('usuario_id')->constrained('users');
-            $table->foreignId('trilha_id')->constrained('trilhas');
+            $table->increments('id');
+
+            $table->unsignedInteger('usuarios_id');
+            $table->foreign('usuarios_id')->references('id')->on('users');
+
+            $table->unsignedInteger('trilhas_id');
+            $table->foreign('trilhas_id')->references('id')->on('trilhas');
+           
             $table->timestamps();
         });
     }

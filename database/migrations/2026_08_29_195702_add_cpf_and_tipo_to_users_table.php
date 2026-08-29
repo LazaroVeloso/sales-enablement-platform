@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->string('cpf')->unique();
-            $table->foreignId('tipo_id')->constrained('tipos');
+            $table->unsignedInteger('tipos_id');
+            $table->foreign('tipos_id')->references('id')->on('tipos');            
         });
     }
 
@@ -25,8 +26,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropForeign(['tipo_id']);
-            $table->dropColumn(['cpf', 'tipo_id']);
+            Schema::dropIfExists('users');
+
         });
     }
 };

@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('conteudos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('link');
             $table->string('nome');
             $table->integer('sequencia');
             $table->text('descricao')->nullable();
             $table->integer('visualizacoes')->default(0);
-            $table->foreignId('trilha_id')->constrained('trilhas');
+            $table->unsignedInteger('trilhas_id');
+            $table->foreign('trilhas_id')->references('id')->on('trilhas')->onDelete('cascade');
             $table->string('formato');
             $table->timestamps();
         });
@@ -32,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('conteudos');
     }
 };
+
